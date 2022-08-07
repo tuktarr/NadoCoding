@@ -1,5 +1,5 @@
 #include <stdio.h>
-int main(void) {
+int main_loop(void) {
 	//피라미드를 쌓아라
 	int floor;
 	printf("몇 층으로 쌓겠느냐?");

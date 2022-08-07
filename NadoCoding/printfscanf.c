@@ -1,5 +1,5 @@
 #include <stdio.h>
-int mainprintf(void)
+int main_printf(void)
 {
 	//정수형 변수에 대한 예제
 	//int age = 12;
