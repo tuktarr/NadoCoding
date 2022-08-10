@@ -17,7 +17,7 @@ int conv_pos_x(int x);
 int conv_pos_y(int y);
 void printAnimals();
 void printQuestion();
-
+int foundAllAnimals();
 
 int main(void) {
 
@@ -53,7 +53,7 @@ int main(void) {
 
 		//같은 동물인 경우
 		if ((checkAnimal[firstSelect_x][firstSelect_y] == 0) //카드가 뒤집히지 않았는지
-			&& (checkAnimal[firstSelect_x][firstSelect_y] == 0)
+			&& (checkAnimal[secondSelect_x][secondSelect_y] == 0)
 
 			&&
 
@@ -61,10 +61,30 @@ int main(void) {
 				== arrayAnimal[secondSelect_x][secondSelect_y])
 			) //두 동물이 같은지
 		{
-			printf("\n\n빙고! : %s 발견\n\n", strAnimal[arrayAnimal[firstSelect_x][firstSelect_y]);
+			printf("\n\n빙고! : %s 발견\n\n", strAnimal[arrayAnimal[firstSelect_x][firstSelect_y]]);
 			checkAnimal[firstSelect_x][firstSelect_y] = 1;
 			checkAnimal[secondSelect_x][secondSelect_y] = 1;
 		}
+		// 다른 동물인 경우
+		else {
+			printf("\n\n 땡!! (틀렸거나, 이미 뒤집힌 카드입니다.\n");
+			printf("%d : %s\n", select1, strAnimal[arrayAnimal[firstSelect_x][firstSelect_y]]);
+			printf("%d : %s\n", select2, strAnimal[arrayAnimal[secondSelect_x][secondSelect_y]]);
+			printf("\n\n");
+
+			failCount++;
+
+		}
+
+		//모든 동물을 찾았는지 여부, 1 : 참, 0 : 거짓
+		if (foundAllAnimals() == 1) {
+			printf("\n\n 축하합니다 ! 모든 동물을 다 찾았네요. \n");
+			printf("지금까지 총 %d번 실수하셨습니다.",failCount);
+			break;
+		}
+
+
+		
 	}
 	return 0;
 }
@@ -170,9 +190,23 @@ void printQuestion() {
 			{
 				printf("%8d", seq);
 			}
+
+			seq++;
 		}
 
 		printf("\n");
 
 	}
+}
+
+int foundAllAnimals() {
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = 0; j < 5; j++) {
+			if (checkAnimal[i][j] == 0) {
+				return 0;
+			}
+		}
+	}
+	return 1; //모든 동물 다 찾음
 }
